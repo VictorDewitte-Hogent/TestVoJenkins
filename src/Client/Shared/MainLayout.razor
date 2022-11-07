@@ -1,0 +1,15 @@
+﻿@inherits LayoutComponentBase
+
+<CascadingValue Value="this">
+    <Header />
+    @Body
+</CascadingValue>
+
+@code {
+    public Action? HeaderAdditionAction { get; set; }
+
+    public void SetHeaderAdditionsMethod(Action? method)
+    {
+        HeaderAdditionAction = method;
+    }
+}

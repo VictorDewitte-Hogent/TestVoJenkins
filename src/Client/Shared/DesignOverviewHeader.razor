@@ -1,0 +1,12 @@
+﻿<button @onclick="OnDeleteClicked">@(isDelete ? "Cancel" : "Delete designs")</button>
+
+@code {
+    [CascadingParameter]
+    public MainLayout MainLayout { get; set; }
+    private bool isDelete = false;
+
+    private void OnDeleteClicked() {
+        isDelete = !isDelete;
+        MainLayout.HeaderAdditionAction?.Invoke();
+    }
+}

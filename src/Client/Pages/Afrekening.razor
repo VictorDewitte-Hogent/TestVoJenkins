@@ -1,0 +1,127 @@
+﻿@page "/afrekening"
+
+<main>
+   <div class="body">
+        <div class="order_cart">
+            <h3 class ="tableHeader">Order Cart</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Reference</th>
+                        <th>Cost ea.</th>
+                        <th>Amount</th>
+                        <th>Packaging cost</th>
+                        <th >Total Price</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PHPPHOTOALBUM</td>
+                        <td>7.213.000</td>  
+                        <td class="amount">1</td>
+                        <td>4500 EUR</td>
+                        <td>7217500</td>
+                        <td><iconify-icon icon="bi:trash"></iconify-icon></td>
+                    </tr>
+                    <tr>
+                        <td>PHPPHOTOALBUM</td>
+                        <td>7.111.000</td>
+                        <td>1</td>
+                        <td>4500 EUR</td>
+                        <td>7217500</td>
+                        <td><iconify-icon icon="bi:trash"></iconify-icon></td>
+                    </tr>
+                    <tr>
+                        <td>PHPPHOTOALBUM</td>
+                        <td>7.111.000</td>
+                        <td>1</td>
+                        <td>4500 EUR</td>
+                        <td>7217500</td>
+                        <td><iconify-icon icon="bi:trash"></iconify-icon></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+       <div class="cart_bottom">
+            <div class="price_calculation">
+                <h3 class="tableHeader">Price Calculation</h3>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Subtotal:</td>
+                            <td>5.400.000 EUR</td>
+                        </tr>
+                        <tr>
+                            <td>Shipping:</td>
+                            <td>5.000 EUR</td>
+                        </tr>
+                        <tr>
+                            <td>VAT%:</td>
+                            <td>21%</td>
+                        </tr>
+                        <tr>
+                            <td>VAT Amount:</td>
+                            <td>1.200.000</td>
+                        </tr>
+                        <tr>
+                            <td>Total:</td>
+                            <td>6.800.000 EUR</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="shipping_calculator">
+                <h3 class="tableHeader">Shipping Calculator</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Type</th>
+                            <th>Shipping estimate</th>
+                            <th>Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <input id="radio-ecological" type="radio" name="type" value="ecological shipping" checked />
+                                <label for="radio-ecological">Ecological shipping</label>
+                                <iconify-icon icon="ic:outline-eco"></iconify-icon>
+                            </td>
+                            <td>7-14 working days</td>
+                            <td>+0 EUR</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="radio-express" type="radio" name="type" value="Express shipping" />
+                                <label for="radio-express"> Express shipping</label>
+                            </td>
+                            <td>2-3 working days</td>
+                            <td>+10.000 EUR</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input id="radio-normal" type="radio" name="type" value="Normal shipping" />
+                                <label for="radio-normal">Normal shipping</label>
+                            </td>
+                            <td>5-7 working days</td>
+                            <td>+5.000 EUR</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+       </div>
+       <div class="button">
+            <button style="width:7em;">Order</button>
+       </div>
+   </div>
+
+</main>
+
+@code {
+
+}

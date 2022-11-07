@@ -1,0 +1,62 @@
+﻿@page "/notifications/settings"
+@inject NavigationManager Navigation
+
+<main>
+    <div class="notification-wrapper shadow">
+        <div class="notification-top">
+            <h1 class="notification-title">Settings</h1>
+            <iconify-icon style="font-size:30px" icon="material-symbols:cancel" @onclick="NavigateNotification"></iconify-icon>
+        </div>
+        <div class="notification--items">
+            <h2 class="notification-subtitle">Notification methods</h2>
+            <a> 
+                <input type="checkbox" id="notifications" checked />
+                <iconify-icon  icon="ci:notification-dot"></iconify-icon>
+                <label for="notifications" >Push notifications</label>
+            </a>
+            <a> 
+               <input type="checkbox" id="emails" />
+                <iconify-icon icon="ic:round-mark-email-unread"></iconify-icon>
+                <label for="emails">Emails</label>
+            </a>
+
+            <hr />
+
+            <h2 class="notification-subtitle">Notification types</h2>
+            <a>
+                <input type="checkbox" id="packagestatus" checked />
+                <iconify-icon icon="bxs:package"></iconify-icon>
+                <label for="packagestatus">Pachage status changes</label>
+            </a>
+            <a>
+                <input type="checkbox" id="packagedelivery" />
+                <iconify-icon icon="bxs:time"></iconify-icon>
+                <label for="packagedelivery">Package delivery time changes</label>
+            </a>
+            <a>
+                <input type="checkbox" id="ordercancelled" checked />
+                <iconify-icon icon="material-symbols:cancel"></iconify-icon>
+                <label for="ordercancelled">Order cancelled</label>
+            </a>
+            <a>
+                <input type="checkbox" id="feedback" />
+                <iconify-icon icon="ic:sharp-feedback"></iconify-icon>
+                <label for="feedback">Answer to feedback</label>
+            </a>
+            <a>
+                <input type="checkbox" id="newsletter" checked />
+                <iconify-icon icon="mdi:email-newsletter"></iconify-icon>
+                <label for="newsletter">Daily newsletter</label>
+            </a>
+        </div>
+    </div>
+</main>
+
+
+@code {
+    private void NavigateNotification()
+    {
+        Navigation.NavigateTo("/notifications");
+    }
+
+}

@@ -1,0 +1,54 @@
+﻿@page "/track_order/{Id:int}"
+
+
+<main>
+    <div class="body">
+            <div class="order_details">
+                <h2 class="tableHeader">Order 49111</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Reference</th>
+                            <td>PHPPHOTOALBUM</td>
+                        </tr>
+                        <tr>
+                            <th>Status</th>
+                            <td>On The Truck</td>
+                        </tr>
+                        <tr>
+                            <th>Order date time</th>
+                            <td>2020-02-14 15:57</td>
+                        </tr>
+                        <tr>
+                            <th>Arrived By</th>
+                            <td>2023-02-14 15:57</td>
+                        </tr>
+                        <tr>
+                            <th>Stops before you</th>
+                            <td>32</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+        <div class="delivery">
+
+            <div class="delivery_time">
+                <img src="assets/shipping.png" />
+            </div>
+
+            <div class="gmap_canvas">
+                <iframe src="https://maps.google.com/maps?q=@LAT,@LONG&t=&z=15&ie=UTF8&iwloc=&output=embed " />
+
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+@code {
+    [Parameter] public int Id { get; set; }
+    private string LAT = "51.5997";
+    private string LONG = "4.3070";
+}

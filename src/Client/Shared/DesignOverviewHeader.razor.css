@@ -1,0 +1,10 @@
+﻿button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+button:hover {
+    text-decoration: underline;
+}

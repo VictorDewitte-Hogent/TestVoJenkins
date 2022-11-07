@@ -1,0 +1,50 @@
+﻿input {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border: 1px solid darkgray;
+    border-bottom: 2px solid black;
+    outline: none;
+    padding: 6px;
+}
+
+.header-addition .filtericon {
+    cursor: pointer;
+    background-image: url(../assets/filter.svg);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    filter: invert(98%) sepia(1%) saturate(393%) hue-rotate(253deg) brightness(123%) contrast(100%);
+    width: 30px;
+    height: 30px;
+    transition: background-image 0.5s ease-in-out;
+}
+
+.header-addition .filtericonclose {
+    background-image: url(../assets/filter-remove.svg);
+}
+
+.header-addition {
+    flex: 1;
+}
+
+.search-wrapper {
+    position: relative;
+}
+
+.search-wrapper::before {
+    content: "";
+    position: absolute;
+    background-image: url("../assets/search.svg");
+    background-size: cover;
+    width: 15px;
+    height: 15px;
+    left: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    /* filter: invert(98%) sepia(1%) saturate(393%) hue-rotate(253deg) brightness(123%) contrast(100%); */
+}
+
+.search {
+    outline: none;
+    padding: 6px 6px 6px 30px;
+}

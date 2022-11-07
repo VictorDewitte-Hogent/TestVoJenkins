@@ -1,0 +1,63 @@
+﻿@page "/designs"
+@using Client.Boxes
+@using global::Shared.Boxes
+@inject NavigationManager NavigationManager
+
+<main>
+    <div class="designs-wrapper">
+        @if (customBoxes == null) {
+            <div>Loading...</div>
+        } else {
+            @foreach (BoxDto.Index box in customBoxes) {
+                <div class="design-item shadow" @onclick="() => OnDesignClicked(box.Id)">
+                    <div class="design-item--preview">
+                        <img src="assets/smallbox.png" />
+                    </div>
+                    <div class="design-item--title">
+                        <h2>@box.Name</h2>
+                    </div>
+                    <div class="design-item--dimensions">
+                        <span>@(box.Width)x@(box.Height)x@(box.Length)</span>
+                    </div>
+                    <div class="design-item--remove shadow @(isDelete ? "show" : "")" @onclick="() => OnDeleteClicked(box)" @onclick:stopPropagation="true">
+                        <iconify-icon icon="fluent:delete-20-filled" width="20" heigth="20"/>
+                    </div>
+                </div>
+            }
+        } 
+    </div>
+</main>
+
+@code {
+    [CascadingParameter]
+    public MainLayout MainLayout { get; set; }
+
+    [Inject] public IBoxService BoxService { get; set; }
+
+    private List<BoxDto.Index>? customBoxes;
+    private bool isDelete = false;
+
+    private void OnDesignClicked(int Id) {
+        NavigationManager.NavigateTo("/design/" + Id);
+    }
+
+    private async void OnDeleteClicked(BoxDto.Index box) {
+        BoxRequest.Delete request = new() { BoxId = box.Id };
+        await BoxService.DeleteAsync(request);
+        customBoxes.Remove(box);
+        StateHasChanged();
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        MainLayout.SetHeaderAdditionsMethod(ToggleDelete);
+        BoxRequest.GetIndex request = new() {CustomerId = 1, Page = 1};
+        BoxResponse.GetIndex response = await BoxService.GetIndexAsync(request);
+        customBoxes = response.Boxes;
+    }
+
+    private void ToggleDelete() {
+        isDelete = !isDelete;
+        StateHasChanged();
+    }
+}

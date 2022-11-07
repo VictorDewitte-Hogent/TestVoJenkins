@@ -1,0 +1,94 @@
+﻿@page "/"
+@inject NavigationManager Navigation
+
+<main>
+    <div class="filter-wrapper @(_isFilterOpen ? "filter-open" : "")">
+        <div class="filter-bar">
+            <div class="filter-left">
+                <h2 class="m-0">Filters</h2>
+                <div class="filter-group">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" id="arrived" type="checkbox" value="Arrived" checked>s
+                        <label class="form-check-label" for="arrived">Arrived</label> 
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" id="transit" type="checkbox" value="In Transit" checked>
+                        <label class="form-check-label" for="transit">In Transit</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" id="processing" type="checkbox" value="Processing" checked>
+                        <label class="form-check-label" for="processing">Processing</label>
+                    </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" id="processing" type="checkbox" value="Processing" checked>
+                        <label class="form-check-label" for="processing">Order placed</label>
+                    </div>
+                </div>
+            </div>
+            <div class="filter-right">
+                <div class="filter-group">
+                    <label for="begindate">Start</label>
+                    <input name="begindate" type="date">
+                </div>
+                @* <span> - </span> *@
+                <div class="filter-group">
+                    <label for="begindate">Einde</label>
+                    <input name="begindate" type="date">
+                </div>
+            </div>
+        </div>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>Order ID</th>
+                <th>Name</th>
+                <th>Order Time</th>
+                <th>Dimentions</th>
+                <th>Cost</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr @onclick="NavigateToTrackOrder">
+                <td>49111</td>
+                <td>PHPPHOTOALBUM</td>
+                <td>2020-02-14 15:45</td>
+                <td>20 x 15 x 8</td>
+                <td>7.213.000 euro</td>
+            </tr>
+            <tr @onclick="NavigateToTrackOrder">
+                <td>49152</td>
+                <td>BARCODESCANNERS</td>
+                <td>2020-01-14 15:45</td>
+                <td>20 x 20 x 5</td>
+                <td>913.000 euro</td>
+            </tr>
+        </tbody>
+    </table>
+</main>
+
+@code {
+    [CascadingParameter]
+    public MainLayout MainLayout { get; set; }
+
+    //Test variable for link to TrackOrder
+    private int Id = 49111;
+
+    private bool _isFilterOpen;
+
+    void NavigateToTrackOrder(){
+        Navigation.NavigateTo("track_order/"+Id);
+    }
+
+    protected override void OnInitialized()
+    {
+        _isFilterOpen = false;
+        MainLayout.SetHeaderAdditionsMethod(OpenFilterBar);
+    }
+
+    private void OpenFilterBar() {
+        Console.WriteLine("Open filter bar");
+        _isFilterOpen = !_isFilterOpen;
+        StateHasChanged();
+    }
+}

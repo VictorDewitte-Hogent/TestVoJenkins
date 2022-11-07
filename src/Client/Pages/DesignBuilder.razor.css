@@ -1,0 +1,201 @@
+﻿main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.title-input--wrapper {
+    position: relative;
+    display: inline-flex;
+    border-bottom: 1px solid darkgray;
+    padding: 0 0 6px 0;
+    margin: var(--padding-sides) calc(var(--padding-sides) * 2) 0 calc(var(--padding-sides) * 2);
+    width: -moz-available; /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available; /* Mozilla-based browsers will ignore this. */
+    width: fill-available;
+}
+
+::deep .title-input--wrapper .validation-message {
+    position: absolute;
+    left: 0;
+    bottom: -32px;
+    opacity: 1;
+}
+
+.title-input--icon {
+    display: flex;
+    align-items: center;
+}
+
+h1, ::deep .title-input {
+    font-size: 2em;
+    line-height: 1.4em;
+}
+
+::deep .title-input {
+    outline: none !important;
+    border: none;
+    width: 100%;
+}
+
+h2 {
+    font-size: 1.4em;
+    border-bottom: 1px solid darkgray;
+}
+
+.box-overview {
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    justify-content: center;
+    gap: 96px;
+    align-items: center;
+    margin: 48px 12px 0 12px;
+}
+
+.box-preview {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-preview img {
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.box-preview, .box-settings {
+    flex-basis: 450px;
+    max-width: 450px;
+    min-width: 250px;
+}
+
+.inputs {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.input-row {
+    position: relative;
+    display: flex;
+    align-items: center;
+    --background-inactive: #EEF4FF;
+    --background-active: var(--color-primary);
+}
+
+::deep .input-row--input.invalid + .input-row--validation {
+    display: flex;
+}
+
+.input-row .input-row--validation {
+    display: none;
+    position: absolute;
+    right: 6px;
+    color: var(--color-primary);
+    align-items: center;
+}
+
+::deep .input-row--validation:hover .validation-message {
+    opacity: 1;
+    pointer-events: all;
+}
+
+::deep .input-row .validation-message {
+    width: max-content;
+    pointer-events: none;
+    opacity: 0;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    bottom: -48px;
+    right: -9.5px;
+    padding: 8px;
+    border-radius: var(--border-radius);
+    background-color: rgb(200, 200, 200);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: opacity 0.2s ease-in-out;
+}
+
+::deep .input-row .validation-message::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 10px solid rgb(200, 200, 200);
+    right: 12px;
+    top: -10px;
+}
+
+.input-row iconify-icon:hover::after {
+    position: absolute;
+}
+
+::deep .input-row > :first-child,
+.input-row > :first-child {
+    border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+::deep .input-row > :nth-child(2),
+.input-row > :nth-child(2) {
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+
+
+.input-row--label {
+    color: #99A3BA;
+    background-color: var(--background-inactive);
+    padding: 8px 12px 8px 12px;
+    transition: all 0.2s ease-in-out;
+    width: 80px;
+    text-align: center;
+}
+
+::deep .input-row--input {
+    height: 40px;
+    outline: none !important;
+    border: 1px solid var(--background-inactive);
+    padding: 0 6px;
+    width: 100%;
+    transition: all 0.2s ease-in-out;
+}
+
+::deep .input-row--input:focus {
+    border: 1px solid var(--background-active);
+}
+
+.input-row:focus-within .input-row--label {
+    color: white;
+    background-color: var(--background-active);
+}
+
+.cost-estimation {
+    margin: 12px 0 0 0;
+    display: block;
+    width: 100%;
+    text-align: center;
+}
+
+button {
+    border: none;
+    color: white;
+    padding: 8px 12px;
+    border-radius: var(--border-radius);
+    background-color: var(--color-primary);
+    width: 200px;
+}
+
+button:hover {
+    background-color: var(--color-secondary);
+}
+
+.inputs-bottom {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+}

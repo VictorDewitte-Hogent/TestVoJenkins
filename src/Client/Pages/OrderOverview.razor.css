@@ -1,0 +1,131 @@
+﻿main {
+    --filter-height: 180px;
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+    border: 1px solid darkgray;
+    border-bottom: 2px solid black;
+    outline: none;
+    padding: 6px;
+}
+
+table {
+    z-index: 1;
+    flex: 1 1 100%;
+}
+
+thead tr {
+    background-color: #e2dfdf;
+}
+
+table tr > th:first-of-type,
+table tr > td:first-of-type {
+    padding: 0 0 0 var(--padding-sides);
+}
+table tr > th:last-of-type,
+table tr > td:last-of-type {
+    padding: 0 var(--padding-sides) 0 0;
+}
+table tr > th,
+table tr > td {
+    padding: 8px 0;
+}
+
+tbody tr {
+    background-color: white;
+    cursor: pointer;
+}
+tbody tr:hover {
+    filter: brightness(0.95);
+}
+
+.filter-wrapper {
+    z-index: 0;
+    transition: all 300ms ease-in-out;
+    opacity: 0;
+    height: 0px;
+}
+
+.filter-open {
+    opacity: 1;
+    height: var(--filter-height);
+}
+
+.filter-bar {
+    left: 0;
+    right: 0;
+    position: absolute;
+    padding: 0 var(--padding-sides) 0 var(--padding-sides);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: var(--filter-height);
+    font-size: 1.2em;
+}
+
+.filter-left, .filter-right {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.filter-left h2 {
+    font-size: 1.3em;
+    font-weight: normal;
+    margin: 0;
+}
+
+.filter-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.filter-right {
+    flex-direction: column;
+    gap: 4px;
+}
+
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+@keyframes slideDown {
+    0% { 
+      opacity: 0;
+      height: 0px;
+    }
+  
+    100% {
+      opacity: 1;
+      height: var(--filter-height);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    main {
+        --filter-height: 48px;
+    }
+
+    .filter-left {
+        flex-direction: row;
+        align-items: flex-end;
+    }
+
+    .filter-right {
+        flex-direction: row;
+        gap: 12px;
+    }
+
+    .filter-group {
+        align-items: center;
+        flex-direction: row;
+        gap: 12px;
+    }
+  }

@@ -1,0 +1,37 @@
+﻿main {
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+    z-index: 1;
+    flex: 1 1 100%;
+}
+
+thead tr {
+    background-color: #e2dfdf;
+}
+
+table tr > th:first-of-type,
+table tr > td:first-of-type {
+    padding: 0 0 0 var(--padding-sides);
+}
+
+table tr > th:last-of-type,
+table tr > td:last-of-type {
+    padding: 0 var(--padding-sides) 0 0;
+}
+
+table tr > th,
+table tr > td {
+    padding: 8px 0;
+}
+
+tbody tr {
+    background-color: white;
+    cursor: pointer;
+}
+
+    tbody tr:hover {
+        filter: brightness(0.95);
+    }

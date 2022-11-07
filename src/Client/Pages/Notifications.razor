@@ -1,0 +1,34 @@
+﻿@page "/notifications"
+@using Domain.Notifications
+@inject NavigationManager Navigation
+
+<main>
+    <div class="notification-wrapper shadow">
+        <div class="notification-top">
+            <h1 class="notification-title">Your notifications</h1>
+            <img class="notification-settings-icon" src="assets/settings.svg" @onclick="NavigateNotificationSettings">
+        </div>
+        <div class="notification--items">
+            @foreach (var notification in notifications)
+            {
+                <div class="notification--item">
+                    <span class="notification--item--content">@notification.content</span>
+                    <span class="notification--item--date">@notification.relativeDate</span>
+                </div>
+            }
+        </div>
+    </div>
+</main>
+
+@code {
+    private List<Notification> notifications = new List<Notification>() {
+        new Notification("Product 'WORDPRESS SEO' is now back in stock", DateTime.UtcNow, NotificationCategory.BACK_IN_STOCK),
+        new Notification("Order 'BARCODESCANNER' is now in transit, expected arrival in 4h.", DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(20)), NotificationCategory.TRACKING_CHANGES),
+        new Notification("Shipment information updated for order 'PHPPHOTOALBUM'", DateTime.UtcNow.Subtract(TimeSpan.FromDays(2)), NotificationCategory.TRACKING_CHANGES)
+    };
+
+    private void NavigateNotificationSettings()
+    {
+        Navigation.NavigateTo("/notifications/settings");
+    }
+}

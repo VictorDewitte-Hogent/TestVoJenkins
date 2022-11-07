@@ -1,0 +1,93 @@
+﻿@page "/design/{id:int}"
+@using Client.Boxes
+@using global::Shared.Boxes
+@using System.Globalization
+@using FluentValidation.Results
+@using Blazored.FluentValidation
+@inject NavigationManager NavigationManager
+
+<main>
+    <EditForm Model="@customBox" OnValidSubmit="@HandleValidSubmit">
+        <FluentValidationValidator />
+        <div>
+            <div class="title-input--wrapper">
+                <InputText type="text" class="title-input" @bind-Value="customBox.Name" />
+                <iconify-icon class="title-input--icon" icon="ant-design:edit-outlined" width="20"></iconify-icon>
+                <ValidationMessage For="() => customBox.Name" />
+            </div>
+            <div class="box-overview">
+                <div class="box-preview">
+                    <img src="assets/mediumbox.png" />
+                </div>
+                <div class="box-settings">
+                    <h2>Customize dimensions</h2>
+                    <div class="inputs">
+                        <div class="input-row">
+                            <label class="input-row--label" for="width">Width</label>
+                            <InputNumber ParsingErrorMessage="Width is required" class="input-row--input" id="width" @bind-Value="customBox.Width" placeholder="20.0" autofocus />
+                            <div class="input-row--validation">
+                                <iconify-icon icon="carbon:information-filled" width="25" heigth="25"></iconify-icon>
+                                <ValidationMessage For="() => customBox.Width" />
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <label class="input-row--label" for="height">Height</label>
+                            <InputNumber ParsingErrorMessage="Height is required" class="input-row--input" id="height" @bind-Value="customBox.Height" placeholder="40.0" />
+                            <div class="input-row--validation">
+                                <iconify-icon icon="carbon:information-filled" width="25" heigth="25"></iconify-icon>
+                                <ValidationMessage For="() => customBox.Height" />
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <label class="input-row--label" for="length">Length</label>
+                            <InputNumber ParsingErrorMessage="Length is required" class="input-row--input" id="length" @bind-Value="customBox.Length" placeholder="60.0" />
+                            <div class="input-row--validation">
+                                <iconify-icon icon="carbon:information-filled" width="25" heigth="25"></iconify-icon>
+                                <ValidationMessage For="() => customBox.Length" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="inputs-bottom">
+                        <span class="cost-estimation">Estimated price / box: @((customBox.Width * customBox.Height * customBox.Length).ToString("C", CultureInfo.GetCultureInfoByIetfLanguageTag("en-US")))</span>
+                        <div class="inputs-bottom--buttons">
+                            <button type="submit">Save</button>
+                            <button @onclick="DeleteDesign" @onclick:preventDefault="true">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+</main>
+
+@code {
+    [Parameter] public int Id { get; set; }
+    [Inject] public IBoxService BoxService { get; set; }
+
+    private BoxDto.Mutate customBox = new();
+
+    protected override async Task OnParametersSetAsync()
+    {
+        BoxRequest.GetDetail request = new() { BoxId = Id };
+        BoxResponse.GetDetail response = await BoxService.GetDetailAsync(request);
+        customBox = new BoxDto.Mutate() { CustomerId = 1, Height = response.Box.Height, Length = response.Box.Length, Width = response.Box.Width, Name = response.Box.Name };
+    }
+
+    private async void HandleValidSubmit()
+    {
+        BoxDto.Mutate.Validator validator = new();
+        ValidationResult result = validator.Validate(customBox);
+
+        Console.WriteLine(result.IsValid);
+
+        BoxRequest.Edit request = new() { Box = customBox, BoxId = Id };
+        BoxResponse.Edit response = await BoxService.EditAsync(request);
+        NavigationManager.NavigateTo("/designs");
+    }
+
+    private async void DeleteDesign() {
+        BoxRequest.Delete request = new() { BoxId = Id };
+        await BoxService.DeleteAsync(request);
+        NavigationManager.NavigateTo("/designs");
+    }
+}

@@ -1,0 +1,70 @@
+﻿@inject NavigationManager Navigation
+
+<header>
+    <div class="header-top">
+        <img class="logo" src="assets/logo.png" alt="delaware logo">
+        <div class="header-right">
+            <NotificationsPopup></NotificationsPopup>
+            <img class="avatar" src="assets/avatar.png" alt="account">
+        </div>
+    </div>
+    <nav class="header-bottom">
+        <div class="header-left">
+            <NavLink class="nav-item" href="/products">
+                <div class="nav-wrapper">
+                    <span>Products</span>
+                </div>
+                <div class="nav-underline"></div>
+            </NavLink>
+            <NavLink class="nav-item" href="/">
+                <div class="nav-wrapper">
+                    <span>Order centre</span>  
+                </div>
+                <div class="nav-underline"></div>
+            </NavLink>
+            <NavLink class="nav-item" href="/designs">
+                <div class="nav-wrapper">
+                    <span>Shipping centre</span>
+                </div>
+                <div class="nav-underline"></div>
+            </NavLink>
+            <NavLink class="nav-item" href="/notifications">
+                <div class="nav-wrapper">
+                    <span>Notification centre</span>
+                </div>
+                <div class="nav-underline"></div>
+            </NavLink>
+        </div>
+        <div class="header-addition">
+            @*Add header Additions here*@
+            @switch(currentUrl) {
+                case "":
+                    <OrderOverviewHeader/>
+                    break;
+                case "designs":
+                    <DesignOverviewHeader/>
+                    break;
+                default:
+                    break;
+            }
+        </div>
+    </nav>
+</header>
+
+@code {
+    private Type? selectedType = null;
+    private string? currentUrl;
+
+    protected override void OnInitialized()
+    {
+        currentUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+        Navigation.LocationChanged += HandleLocationChanged;
+    }
+
+    private void HandleLocationChanged(object? sender, LocationChangedEventArgs e)
+    {
+        currentUrl = Navigation.ToBaseRelativePath(Navigation.Uri);
+        StateHasChanged();
+    }
+
+}

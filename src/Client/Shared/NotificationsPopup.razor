@@ -1,0 +1,40 @@
+﻿@using Domain.Notifications
+@inject NavigationManager Navigation
+
+<div class="notification-wrapper">
+    <img class="notification" src="assets/notification.svg" alt="notification" @onclick="NotificationClicked" />
+    <span class="notification-amount" @onclick="NotificationClicked">1</span>
+    <div class="notification-menu shadow @(open?"notification-menu--open":"notification-menu--closed")">
+        <div class="notification-menu--items">
+            @foreach (var notification in notifications) {
+                <div class="notification-menu--item">
+                    <span class="notification-menu--item--content">@notification.content</span>
+                    <span class="notification-menu--item--date">@notification.relativeDate</span>
+                </div>
+            }
+        </div>
+        <div class="notification-menu--viewall">
+            <a @onclick="NavigateNotifications">
+                View all notifications
+            </a>
+        </div>
+    </div>
+</div>
+
+@code {
+    private Boolean open = false;
+    private List<Notification> notifications = new List<Notification>() {
+        new Notification("Product 'WORDPRESS SEO' is now back in stock", DateTime.UtcNow, NotificationCategory.BACK_IN_STOCK),
+        new Notification("Order 'BARCODESCANNER' is now in transit, expected arrival in 4h.", DateTime.UtcNow.Subtract(TimeSpan.FromMinutes(20)), NotificationCategory.TRACKING_CHANGES),
+        new Notification("Shipment information updated for order 'PHPPHOTOALBUM'", DateTime.UtcNow.Subtract(TimeSpan.FromDays(2)), NotificationCategory.TRACKING_CHANGES)
+    };
+
+    private void NavigateNotifications() {
+        Navigation.NavigateTo("/notifications");
+        open = false;
+    }
+
+    private void NotificationClicked() {
+        open = !open;
+    }
+}
